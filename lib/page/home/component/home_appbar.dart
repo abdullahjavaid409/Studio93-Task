@@ -25,7 +25,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSize {
       backgroundColor: Colors.transparent,
       elevation: 0,
       surfaceTintColor: Colors.transparent,
-      title: title.toText(fontWeight: FontWeight.bold, fontSize: 18.sp),
+      title: title.toText(fontWeight: FontWeight.bold, fontSize: 16.sp),
       actions: action,
     );
   }

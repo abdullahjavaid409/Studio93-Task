@@ -92,7 +92,7 @@ class HomeContainer extends StatelessWidget {
         child: child ??
             Icon(
               iconData,
-              size: size,
+              size: size ?? 17,
               color: iconColor,
             ),
       ),
