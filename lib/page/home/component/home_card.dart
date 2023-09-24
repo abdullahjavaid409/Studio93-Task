@@ -128,7 +128,7 @@ class HomeCard extends StatelessWidget {
                             return const CalculationTile();
                           },
                           separatorBuilder: (BuildContext context, int index) {
-                            return Divider(
+                            return const Divider(
                               color: Colors.white,
                               thickness: 2,
                             );
