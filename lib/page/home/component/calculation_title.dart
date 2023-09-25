@@ -32,6 +32,9 @@ class CalculationTile extends StatelessWidget {
                     const VisualDensity(horizontal: -4, vertical: -4),
                 onPressed: onPressed == null ? null : () => onPressed!(context),
                 icon: Icon(!isEdit ? Icons.cancel : Icons.arrow_circle_right,
+                    color: !isEdit
+                        ? Colors.red.shade600
+                        : AppColor.lightBlackColor,
                     size: 18)),
           ],
         )

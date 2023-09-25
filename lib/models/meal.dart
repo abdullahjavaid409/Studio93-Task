@@ -4,7 +4,7 @@ class Meal {
   final IconData productIcon;
   final String productTitle;
   bool isEdit;
-  final List<MealProduct> mealProduct;
+  List<MealProduct> mealProduct;
 
   Meal(
       {required this.productIcon,
