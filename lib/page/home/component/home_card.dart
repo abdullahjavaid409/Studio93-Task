@@ -123,26 +123,26 @@ class HomeCard extends StatelessWidget {
                             bottomRight: Radius.circular(12))),
                     child: Container(
                         margin: EdgeInsets.only(bottom: 10.h),
-                        padding: EdgeInsets.only(left: 12.w),
+                        padding: EdgeInsets.only(
+                            left: 12.w, bottom: 20.h, top: 10.h),
                         decoration: BoxDecoration(
                             color: AppColor.backGroundColor,
                             borderRadius: BorderRadius.circular(12)),
-                        child: ListView.separated(
-                          itemCount: mealProduct.length,
-                          shrinkWrap: true,
-                          padding: EdgeInsets.symmetric(vertical: 5.h),
-                          primary: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            return CalculationTile(product: mealProduct[index]);
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const Divider(
-                              color: Colors.white,
-                              thickness: 2,
-                            );
-                          },
-                        ))),
+                        child: Column(children: [
+                          ...mealProduct
+                              .map((e) => Column(
+                                    children: [
+                                      CalculationTile(product: e),
+                                      const Divider(
+                                        color: Colors.white,
+                                        thickness: 2,
+                                      ),
+                                    ],
+                                  ))
+                              .toList(),
+                          const VerticalSpacing(of: 5),
+                          TotalCalculate(productList: mealProduct),
+                        ]))),
           ],
         ),
         HomeContainer(
@@ -186,6 +186,7 @@ class CalculationTile extends StatelessWidget {
                 fontSize: 12.sp,
                 color: AppColor.lightBlackColor),
             IconButton(
+                padding: EdgeInsets.zero,
                 visualDensity:
                     const VisualDensity(horizontal: -4, vertical: -4),
                 onPressed: _pressedCancel,
@@ -197,4 +198,30 @@ class CalculationTile extends StatelessWidget {
   }
 
   void _pressedCancel() {}
+}
+
+class TotalCalculate extends StatelessWidget {
+  final List<MealProduct> productList;
+  const TotalCalculate({super.key, required this.productList});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        'Total'.toText(
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.5,
+            color: AppColor.saveColor,
+            overflow: TextOverflow.ellipsis),
+        const Spacer(),
+        '${productList.fold(0.0, (double currentSum, MealProduct product) => currentSum + product.price)} Cals'
+            .toText(
+                fontWeight: FontWeight.bold,
+                fontSize: 12.sp,
+                color: AppColor.saveColor),
+        const HorizontalSpacing(of: 32),
+      ],
+    );
+  }
 }
