@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
           itemBuilder: (context, index) {
             return HomeCard(
-              mealProduct: dummyMeals[index],
+              mealItem: dummyMeals[index],
             );
           },
           separatorBuilder: (BuildContext context, int index) {
