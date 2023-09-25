@@ -7,17 +7,13 @@ class HomeCard extends StatelessWidget {
   final Meal mealItem;
   final BuildContextCallback? plusCallBack;
   final BuildContextCallback? editPressed;
-  final BuildContextCallback? savePressed;
   const HomeCard(
-      {super.key,
-      this.plusCallBack,
-      this.editPressed,
-      this.savePressed,
-      required this.mealItem});
+      {super.key, this.plusCallBack, this.editPressed, required this.mealItem});
 
   @override
   Widget build(BuildContext context) {
     final mealProduct = mealItem.mealProduct;
+    final isSave = mealItem.isEdit;
     return Stack(
       alignment: Alignment.topRight,
       clipBehavior: Clip.none,
@@ -54,44 +50,34 @@ class HomeCard extends StatelessWidget {
                                 fontSize: 14.sp, fontWeight: FontWeight.w700),
                             const VerticalSpacing(of: 5),
                             mealProduct.isNotEmpty
-                                ? !mealItem.isEdit
-                                    ? Row(
-                                        children: [
-                                          HomeContainer(
-                                            onPressed: editPressed,
-                                            color: Colors.white,
-                                            alignment: Alignment.center,
-                                            height: 20,
-                                            border: Border.all(
-                                                color: AppColor.borderColor),
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            width: 55,
-                                            child: 'Edit'.toText(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12.sp),
-                                          ),
-                                          const HorizontalSpacing(of: 10),
-                                          const Icon(
-                                            Icons.bookmark_border,
-                                            color: AppColor.borderColor,
-                                          )
-                                        ],
-                                      )
-                                    : HomeContainer(
-                                        onPressed: savePressed,
+                                ? Row(
+                                    children: [
+                                      HomeContainer(
+                                        onPressed: editPressed,
                                         color: Colors.white,
                                         alignment: Alignment.center,
-                                        height: 22,
+                                        height: !isSave ? 20 : 22,
                                         border: Border.all(
                                             color: AppColor.borderColor),
                                         borderRadius: BorderRadius.circular(12),
-                                        width: 55,
-                                        child: 'Save'.toText(
-                                            fontWeight: FontWeight.w600,
-                                            color: AppColor.saveColor,
-                                            fontSize: 12.sp),
-                                      )
+                                        width: 55 ,
+                                        child: (!isSave ? 'Edit' : 'Save')
+                                            .toText(
+                                                fontWeight: FontWeight.w600,
+                                                color: !isSave
+                                                    ? null
+                                                    : AppColor.saveColor,
+                                                fontSize: 12.sp),
+                                      ),
+                                      const HorizontalSpacing(of: 10),
+                                      !isSave
+                                          ? const Icon(
+                                              Icons.bookmark_border,
+                                              color: AppColor.borderColor,
+                                            )
+                                          : const SizedBox(),
+                                    ],
+                                  )
                                 : HomeContainer(
                                     color: AppColor.lightBlackColor
                                         .withOpacity(0.3),
@@ -134,7 +120,7 @@ class HomeCard extends StatelessWidget {
                                     children: [
                                       CalculationTile(
                                           product: e,
-                                          isEdit: mealItem.isEdit,
+                                          isEdit: isSave,
                                           onPressed: (context) =>
                                               deletePressed(context, e)),
                                       const Divider(

@@ -28,7 +28,6 @@ class HomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return HomeCard(
                   editPressed: (context) => _pressedEdit(context, meals[index]),
-                  savePressed: (context) => _savePressed(context, meals[index]),
                   plusCallBack: (context) => _pressedAdd(context, meals[index]),
                   mealItem: meals[index],
                 );
@@ -52,14 +51,7 @@ class HomePage extends StatelessWidget {
 
   void _pressedEdit(BuildContext context, Meal meal) {
     final mealProvider = context.read<MealProvider>();
-    meal.isEdit = true;
-    mealProvider.notify();
-  }
-
-  void _savePressed(BuildContext context, Meal meal) {
-    final mealProvider = context.read<MealProvider>();
-
-    meal.isEdit = false;
+    meal.isEdit = !meal.isEdit;
     mealProvider.notify();
   }
 }
