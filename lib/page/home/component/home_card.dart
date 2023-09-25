@@ -2,23 +2,22 @@ import 'package:task/all_utils.dart';
 import 'package:task/models/meal.dart';
 
 class HomeCard extends StatelessWidget {
-  final String title;
-  final bool isEdit;
-  final List<MealProduct> mealProduct;
-  final BuildContextCallback? addPressedCallBack;
+  final Meal mealItem;
+  final BuildContextCallback? plusCallBack;
   final BuildContextCallback? editPressed;
   final BuildContextCallback? savePressed;
+  final BuildContextCallback? tilePressed;
   const HomeCard(
       {super.key,
-      required this.title,
-      this.addPressedCallBack,
-      this.isEdit = false,
-      this.mealProduct = const [],
+      this.plusCallBack,
       this.editPressed,
-      this.savePressed});
+      this.savePressed,
+      this.tilePressed,
+      required this.mealItem});
 
   @override
   Widget build(BuildContext context) {
+    final mealProduct = mealItem.mealProduct;
     return Stack(
       alignment: Alignment.topRight,
       clipBehavior: Clip.none,
@@ -51,11 +50,11 @@ class HomeCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            'Meal One'.toText(
+                            mealItem.productTitle.toText(
                                 fontSize: 14.sp, fontWeight: FontWeight.w700),
                             const VerticalSpacing(of: 5),
                             mealProduct.isNotEmpty
-                                ? !isEdit
+                                ? !mealItem.isEdit
                                     ? Row(
                                         children: [
                                           HomeContainer(
@@ -103,7 +102,8 @@ class HomeCard extends StatelessWidget {
                                     child: 'No Product'.toText(
                                         fontWeight: FontWeight.w600,
                                         color: Colors.white,
-                                        fontSize: 12.sp)),
+                                        fontSize: 12.sp),
+                                  ),
                           ],
                         )
                       ],
@@ -133,7 +133,9 @@ class HomeCard extends StatelessWidget {
                               .map((e) => Column(
                                     children: [
                                       CalculationTile(
-                                          product: e, isEdit: isEdit),
+                                          product: e,
+                                          isEdit: mealItem.isEdit,
+                                          onPressed: tilePressed),
                                       const Divider(
                                         color: Colors.white,
                                         thickness: 1.2,
@@ -147,7 +149,7 @@ class HomeCard extends StatelessWidget {
           ],
         ),
         HomeContainer(
-          onPressed: addPressedCallBack,
+          onPressed: plusCallBack,
           iconData: Icons.add,
           color: AppColor.lightBlackColor,
           width: 51,
