@@ -50,6 +50,5 @@ class Meal {
 class MealProduct {
   final String productItemName;
   final double price;
-
   MealProduct({required this.productItemName, required this.price});
 }
