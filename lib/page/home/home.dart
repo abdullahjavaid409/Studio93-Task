@@ -1,4 +1,5 @@
 import 'package:task/all_utils.dart';
+import 'package:task/page/home/component/add_product_dialog.dart';
 import 'package:task/providers/meal.dart';
 
 class HomePage extends StatelessWidget {
@@ -27,6 +28,7 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
                 itemBuilder: (context, index) {
                   return HomeCard(
+                    plusCallBack: _pressedAdd,
                     mealItem: meals[index],
                   );
                 },
@@ -40,4 +42,11 @@ class HomePage extends StatelessWidget {
   }
 
   void _pressedMenu() {}
+
+  void _pressedAdd(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => const AddProductDialog(),
+    );
+  }
 }
