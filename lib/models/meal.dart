@@ -28,7 +28,7 @@ class Meal {
       productTitle: "Pizza Party",
       mealProduct: [
         MealProduct(productItemName: "Pepperoni Pizza", price: 9.99),
-        MealProduct(productItemName: "Garlic Breadsticks", price: 3.99),
+        MealProduct(productItemName: "Garlic Breads-ticks", price: 3.99),
         MealProduct(productItemName: "Soft Drink", price: 1.99),
       ],
     ),
@@ -36,7 +36,7 @@ class Meal {
       productIcon: Icons.local_dining,
       productTitle: "Pasta Delight",
       mealProduct: [
-        MealProduct(productItemName: "Spaghetti Carbonara", price: 8.99),
+        MealProduct(productItemName: "Spaghetti Carbon", price: 8.99),
         MealProduct(productItemName: "Caesar Salad", price: 4.99),
         MealProduct(productItemName: "Iced Tea", price: 1.49),
       ],
