@@ -1,19 +1,18 @@
 import 'package:task/all_utils.dart';
 import 'package:task/models/meal.dart';
 import 'package:task/page/home/component/calculation_title.dart';
+import 'package:task/providers/meal.dart';
 
 class HomeCard extends StatelessWidget {
   final Meal mealItem;
   final BuildContextCallback? plusCallBack;
   final BuildContextCallback? editPressed;
   final BuildContextCallback? savePressed;
-  final BuildContextCallback? tilePressed;
   const HomeCard(
       {super.key,
       this.plusCallBack,
       this.editPressed,
       this.savePressed,
-      this.tilePressed,
       required this.mealItem});
 
   @override
@@ -136,7 +135,8 @@ class HomeCard extends StatelessWidget {
                                       CalculationTile(
                                           product: e,
                                           isEdit: mealItem.isEdit,
-                                          onPressed: tilePressed),
+                                          onPressed: (context) =>
+                                              deletePressed(context, e)),
                                       const Divider(
                                         color: Colors.white,
                                         thickness: 1.2,
@@ -164,5 +164,12 @@ class HomeCard extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void deletePressed(BuildContext context, MealProduct mealProduct) {
+    if (!mealItem.isEdit) {
+      final provider = context.read<MealProvider>();
+      provider.deleteMeal(mealItem, mealProduct);
+    }
   }
 }

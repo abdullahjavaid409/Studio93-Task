@@ -14,10 +14,8 @@ class MealProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteMeal(int index) {
-    if (index >= 0 && index < _meals.length) {
-      _meals.removeAt(index);
-      notifyListeners();
-    }
+  void deleteMeal(Meal meal, MealProduct product) {
+    meal.mealProduct.remove(product);
+    notifyListeners();
   }
 }
