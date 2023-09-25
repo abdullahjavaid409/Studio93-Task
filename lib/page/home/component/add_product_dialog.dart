@@ -1,7 +1,10 @@
 import 'package:task/all_utils.dart';
+import 'package:task/models/meal.dart';
+import 'package:task/providers/meal.dart';
 
 class AddProductDialog extends StatefulWidget {
-  const AddProductDialog({super.key});
+  final Meal meal;
+  const AddProductDialog({super.key, required this.meal});
 
   @override
   State<AddProductDialog> createState() => _AddProductDialogState();
@@ -35,6 +38,12 @@ class _AddProductDialogState extends State<AddProductDialog> {
                   textAlign: TextAlign.center),
               const VerticalSpacing(of: 16.0),
               TextFormField(
+                validator: (value) {
+                  if (value == null) {
+                    return 'Product Name is Required';
+                  }
+                  return null;
+                },
                 decoration: const InputDecoration(
                     labelText: 'Product Name',
                     labelStyle: TextStyle(color: AppColor.lightBlackColor),
@@ -51,6 +60,12 @@ class _AddProductDialogState extends State<AddProductDialog> {
               ),
               const VerticalSpacing(of: 16.0),
               TextFormField(
+                validator: (value) {
+                  if (value == null) {
+                    return 'Price is Required';
+                  }
+                  return null;
+                },
                 controller: priceController,
                 decoration: const InputDecoration(
                     labelText: 'Price',
@@ -71,9 +86,7 @@ class _AddProductDialogState extends State<AddProductDialog> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.lightBlackColor),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+                onPressed: () => _addProductPressed(context),
                 child: const Text('Add Product'),
               ),
             ],
@@ -81,5 +94,17 @@ class _AddProductDialogState extends State<AddProductDialog> {
         ),
       ),
     );
+  }
+
+  void _addProductPressed(BuildContext context) {
+    if (formValidateKey.currentState!.validate()) {
+      final mealProvider = context.read<MealProvider>();
+      mealProvider.addMeal(
+          widget.meal,
+          MealProduct(
+              productItemName: productNameController.text.trim(),
+              price: double.parse(priceController.text.trim())));
+      Navigator.of(context).pop();
+    }
   }
 }

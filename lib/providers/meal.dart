@@ -6,8 +6,8 @@ class MealProvider extends ChangeNotifier {
 
   List<Meal> get meals => _meals;
 
-  void addMeal(Meal meal) {
-    _meals.add(meal);
+  void addMeal(Meal meal, MealProduct product) {
+    meal.mealProduct.add(product);
     notifyListeners();
   }
 
