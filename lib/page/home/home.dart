@@ -1,4 +1,5 @@
 import 'package:task/all_utils.dart';
+import 'package:task/models/meal.dart';
 
 class HomePage extends StatelessWidget {
   static const String routeName = '/HomePage';
@@ -6,23 +7,29 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dummyMeals = Meal.dummyMeals;
     return Scaffold(
-      appBar: HomeAppBar(
-        action: [
-          IconButton(
-              onPressed: _pressedMenu,
-              icon: const Icon(Icons.more_horiz, color: AppColor.blackColor))
-        ],
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w),
-        child: const Column(
-          children: [
-            HomeCard(),
+        appBar: HomeAppBar(
+          action: [
+            IconButton(
+                onPressed: _pressedMenu,
+                icon: const Icon(Icons.more_horiz, color: AppColor.blackColor))
           ],
         ),
-      ),
-    );
+        body: ListView.separated(
+          itemCount: dummyMeals.length,
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+          itemBuilder: (context, index) {
+            return HomeCard(
+              title: dummyMeals[index].productTitle,
+              isEdit: dummyMeals[index].isEdit,
+              mealProduct: dummyMeals[index].mealProduct,
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const VerticalSpacing(of: 10);
+          },
+        ));
   }
 
   void _pressedMenu() {}

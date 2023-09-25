@@ -1,16 +1,21 @@
 import 'package:task/all_utils.dart';
+import 'package:task/models/meal.dart';
 
 class HomeCard extends StatelessWidget {
   final String title;
   final bool isEdit;
-  final List<String> data;
+  final List<MealProduct> mealProduct;
   final BuildContextCallback? addPressedCallBack;
+  final BuildContextCallback? editPressed;
+  final BuildContextCallback? savePressed;
   const HomeCard(
       {super.key,
-      this.title = 'Meal One',
+      required this.title,
       this.addPressedCallBack,
       this.isEdit = false,
-      this.data = const []});
+      this.mealProduct = const [],
+      this.editPressed,
+      this.savePressed});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +32,7 @@ class HomeCard extends StatelessWidget {
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: data.isNotEmpty
+                  borderRadius: mealProduct.isEmpty
                       ? BorderRadius.circular(12)
                       : const BorderRadius.only(topLeft: Radius.circular(12)),
                 ),
@@ -49,11 +54,12 @@ class HomeCard extends StatelessWidget {
                             'Meal One'.toText(
                                 fontSize: 14.sp, fontWeight: FontWeight.w700),
                             const VerticalSpacing(of: 5),
-                            data.isNotEmpty
-                                ? isEdit
+                            mealProduct.isNotEmpty
+                                ? !isEdit
                                     ? Row(
                                         children: [
                                           HomeContainer(
+                                            onPressed: editPressed,
                                             color: Colors.white,
                                             alignment: Alignment.center,
                                             height: 20,
@@ -73,6 +79,7 @@ class HomeCard extends StatelessWidget {
                                         ],
                                       )
                                     : HomeContainer(
+                                        onPressed: savePressed,
                                         color: Colors.white,
                                         alignment: Alignment.center,
                                         height: 22,
@@ -103,7 +110,7 @@ class HomeCard extends StatelessWidget {
                 ),
               ),
             ),
-            data.isNotEmpty
+            mealProduct.isEmpty
                 ? const SizedBox()
                 : Container(
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -119,13 +126,13 @@ class HomeCard extends StatelessWidget {
                             color: AppColor.backGroundColor,
                             borderRadius: BorderRadius.circular(12)),
                         child: ListView.separated(
-                          itemCount: 4,
+                          itemCount: mealProduct.length,
                           shrinkWrap: true,
-                          padding: EdgeInsets.zero,
+                          padding: EdgeInsets.only(bottom: 5.h),
                           primary: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            return const CalculationTile();
+                            return CalculationTile(product: mealProduct[index]);
                           },
                           separatorBuilder: (BuildContext context, int index) {
                             return const Divider(
@@ -155,17 +162,35 @@ class HomeCard extends StatelessWidget {
 }
 
 class CalculationTile extends StatelessWidget {
-  const CalculationTile({super.key});
+  final MealProduct product;
+  const CalculationTile({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      dense: true,
-      minVerticalPadding: 0,
-      contentPadding: EdgeInsets.zero,
-      visualDensity: const VisualDensity(vertical: -4),
-      title: 'Spicy Bacon Cheese Toast'.toText(
-          fontSize: 12.sp, fontWeight: FontWeight.w400, letterSpacing: 0.5),
+    return Row(
+      children: [
+        product.productItemName.toText(
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.5,
+            overflow: TextOverflow.ellipsis),
+        const Spacer(),
+        Row(
+          children: [
+            '${product.price} Cals'.toText(
+                fontWeight: FontWeight.bold,
+                fontSize: 12.sp,
+                color: ),
+            IconButton(
+                visualDensity:
+                    const VisualDensity(horizontal: -4, vertical: -4),
+                onPressed: _pressedCancel,
+                icon: const Icon(Icons.cancel, size: 18)),
+          ],
+        )
+      ],
     );
   }
+
+  void _pressedCancel() {}
 }
