@@ -135,7 +135,7 @@ class HomeCard extends StatelessWidget {
                                       CalculationTile(product: e),
                                       const Divider(
                                         color: Colors.white,
-                                        thickness: 2,
+                                        thickness: 1.2,
                                       ),
                                     ],
                                   ))
