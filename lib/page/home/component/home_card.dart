@@ -132,7 +132,8 @@ class HomeCard extends StatelessWidget {
                           ...mealProduct
                               .map((e) => Column(
                                     children: [
-                                      CalculationTile(product: e),
+                                      CalculationTile(
+                                          product: e, isEdit: isEdit),
                                       const Divider(
                                         color: Colors.white,
                                         thickness: 1.2,
@@ -165,7 +166,10 @@ class HomeCard extends StatelessWidget {
 
 class CalculationTile extends StatelessWidget {
   final MealProduct product;
-  const CalculationTile({super.key, required this.product});
+  final bool isEdit;
+  final BuildContextCallback? onPressed;
+  const CalculationTile(
+      {super.key, required this.product, required this.isEdit, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -189,8 +193,9 @@ class CalculationTile extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 visualDensity:
                     const VisualDensity(horizontal: -4, vertical: -4),
-                onPressed: _pressedCancel,
-                icon: const Icon(Icons.cancel, size: 18)),
+                onPressed: onPressed == null ? null : () => onPressed!(context),
+                icon: Icon(!isEdit ? Icons.cancel : Icons.arrow_circle_right,
+                    size: 18)),
           ],
         )
       ],
