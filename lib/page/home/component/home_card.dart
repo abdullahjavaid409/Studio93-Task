@@ -41,10 +41,10 @@ class HomeCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const HomeContainer(
+                        HomeContainer(
                           width: 55,
                           height: 55,
-                          iconData: Icons.sunny,
+                          iconData: mealItem.productIcon,
                         ),
                         const HorizontalSpacing(of: 10),
                         Column(
