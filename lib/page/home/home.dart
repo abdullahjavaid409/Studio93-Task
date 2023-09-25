@@ -13,7 +13,8 @@ class HomePage extends StatelessWidget {
           action: [
             IconButton(
                 onPressed: _pressedMenu,
-                icon: const Icon(Icons.more_horiz, color: AppColor.blackColor))
+                icon: const Icon(Icons.more_horiz,
+                    color: AppColor.lightBlackColor))
           ],
         ),
         body: ListView.separated(

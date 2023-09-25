@@ -1,5 +1,4 @@
 import 'package:task/all_utils.dart';
-import 'package:task/utils/app_color.dart';
 
 class AppTheme {
   static ThemeData buildTheme() {
@@ -9,23 +8,23 @@ class AppTheme {
         .copyWith(
             headlineLarge: TextStyle(
               fontSize: 32.sp,
-              color: AppColor.blackColor,
+              color: AppColor.lightBlackColor,
               fontWeight: FontWeight.w700,
             ),
             titleMedium: TextStyle(
               fontSize: 14.sp,
-              color: AppColor.blackColor,
+              color: AppColor.lightBlackColor,
               fontWeight: FontWeight.w500,
             ),
             headlineMedium: TextStyle(
               fontSize: 20.sp,
               letterSpacing: 0.1,
-              color: AppColor.blackColor,
+              color: AppColor.lightBlackColor,
               fontWeight: FontWeight.w400,
             ),
             headlineSmall: TextStyle(
               fontSize: 14.sp,
-              color: AppColor.blackColor,
+              color: AppColor.lightBlackColor,
               fontWeight: FontWeight.w300,
             ))
         .apply(fontFamily: 'Kamerik105');

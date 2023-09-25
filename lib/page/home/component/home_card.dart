@@ -64,7 +64,8 @@ class HomeCard extends StatelessWidget {
                                             alignment: Alignment.center,
                                             height: 20,
                                             border: Border.all(
-                                                color: AppColor.blackColor),
+                                                color:
+                                                    AppColor.lightBlackColor),
                                             borderRadius:
                                                 BorderRadius.circular(12),
                                             width: 55,
@@ -93,7 +94,8 @@ class HomeCard extends StatelessWidget {
                                             fontSize: 12.sp),
                                       )
                                 : HomeContainer(
-                                    color: AppColor.blackColor.withOpacity(0.3),
+                                    color: AppColor.lightBlackColor
+                                        .withOpacity(0.3),
                                     alignment: Alignment.center,
                                     height: 22,
                                     borderRadius: BorderRadius.circular(12),
@@ -121,14 +123,14 @@ class HomeCard extends StatelessWidget {
                             bottomRight: Radius.circular(12))),
                     child: Container(
                         margin: EdgeInsets.only(bottom: 10.h),
-                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        padding: EdgeInsets.only(left: 12.w),
                         decoration: BoxDecoration(
                             color: AppColor.backGroundColor,
                             borderRadius: BorderRadius.circular(12)),
                         child: ListView.separated(
                           itemCount: mealProduct.length,
                           shrinkWrap: true,
-                          padding: EdgeInsets.only(bottom: 5.h),
+                          padding: EdgeInsets.symmetric(vertical: 5.h),
                           primary: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
@@ -146,7 +148,7 @@ class HomeCard extends StatelessWidget {
         HomeContainer(
           onPressed: addPressedCallBack,
           iconData: Icons.add,
-          color: AppColor.blackColor,
+          color: AppColor.lightBlackColor,
           width: 51,
           height: 61,
           borderRadius: const BorderRadius.only(
@@ -168,11 +170,13 @@ class CalculationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         product.productItemName.toText(
             fontSize: 13.sp,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.5,
+            color: AppColor.textColor,
             overflow: TextOverflow.ellipsis),
         const Spacer(),
         Row(
@@ -180,7 +184,7 @@ class CalculationTile extends StatelessWidget {
             '${product.price} Cals'.toText(
                 fontWeight: FontWeight.bold,
                 fontSize: 12.sp,
-                color: ),
+                color: AppColor.lightBlackColor),
             IconButton(
                 visualDensity:
                     const VisualDensity(horizontal: -4, vertical: -4),

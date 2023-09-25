@@ -67,7 +67,7 @@ class HomeContainer extends StatelessWidget {
       this.alignment,
       this.color,
       this.size,
-      this.iconColor = AppColor.blackColor,
+      this.iconColor = AppColor.lightBlackColor,
       this.borderRadius,
       this.child,
       this.onPressed,
