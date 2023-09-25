@@ -64,8 +64,7 @@ class HomeCard extends StatelessWidget {
                                             alignment: Alignment.center,
                                             height: 20,
                                             border: Border.all(
-                                                color:
-                                                    AppColor.lightBlackColor),
+                                                color: AppColor.borderColor),
                                             borderRadius:
                                                 BorderRadius.circular(12),
                                             width: 55,
@@ -76,6 +75,7 @@ class HomeCard extends StatelessWidget {
                                           const HorizontalSpacing(of: 10),
                                           const Icon(
                                             Icons.bookmark_border,
+                                            color: AppColor.borderColor,
                                           )
                                         ],
                                       )
@@ -85,7 +85,7 @@ class HomeCard extends StatelessWidget {
                                         alignment: Alignment.center,
                                         height: 22,
                                         border: Border.all(
-                                            color: AppColor.saveColor),
+                                            color: AppColor.borderColor),
                                         borderRadius: BorderRadius.circular(12),
                                         width: 55,
                                         child: 'Save'.toText(
