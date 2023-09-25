@@ -16,6 +16,7 @@ class Meal {
     Meal(
       productIcon: Icons.fastfood,
       productTitle: "Burger Combo",
+      isEdit: true,
       mealProduct: [
         MealProduct(productItemName: "Classic Burger", price: 6.99),
         MealProduct(productItemName: "French Fries", price: 2.99),
@@ -39,6 +40,10 @@ class Meal {
         MealProduct(productItemName: "Caesar Salad", price: 4.99),
         MealProduct(productItemName: "Iced Tea", price: 1.49),
       ],
+    ),
+    Meal(
+      productIcon: Icons.local_dining,
+      productTitle: "Pasta Delight",
     ),
   ];
 }
