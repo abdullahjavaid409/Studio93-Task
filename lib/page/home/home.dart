@@ -27,6 +27,7 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
               itemBuilder: (context, index) {
                 return HomeCard(
+                  editPressed: (context) => _pressedEdit(context, meals[index]),
                   plusCallBack: (context) => _pressedAdd(context, meals[index]),
                   mealItem: meals[index],
                 );
@@ -47,4 +48,6 @@ class HomePage extends StatelessWidget {
       builder: (context) => AddProductDialog(meal: meal),
     );
   }
+
+  void _pressedEdit(BuildContext context, Meal meal) {}
 }

@@ -39,10 +39,11 @@ class _AddProductDialogState extends State<AddProductDialog> {
               const VerticalSpacing(of: 16.0),
               TextFormField(
                 validator: (value) {
-                  if (value == null) {
+                  if (value == null || value.isEmpty) {
                     return 'Product Name is Required';
+                  } else {
+                    return null;
                   }
-                  return null;
                 },
                 decoration: const InputDecoration(
                     labelText: 'Product Name',
@@ -61,7 +62,7 @@ class _AddProductDialogState extends State<AddProductDialog> {
               const VerticalSpacing(of: 16.0),
               TextFormField(
                 validator: (value) {
-                  if (value == null) {
+                  if (value == null || value.isEmpty) {
                     return 'Price is Required';
                   }
                   return null;
